@@ -1,0 +1,944 @@
+<html class="scroll-smooth" lang="id">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Skyx Shop - Aplikasi Mobile Style
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb;
+   }
+   /* Scrollbar for horizontal category */
+   .category-scroll::-webkit-scrollbar {
+    height: 6px;
+   }
+   .category-scroll::-webkit-scrollbar-thumb {
+    background-color: #a78bfa;
+    border-radius: 3px;
+   }
+  </style>
+ </head>
+ <body class="flex flex-col min-h-screen bg-gray-50">
+  <!-- Header / Navbar -->
+  <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-30">
+   <div class="max-w-md mx-auto flex items-center justify-between px-4 py-3">
+    <h1 class="text-xl font-semibold text-gray-900" id="header-title">
+     SkyxCode Shop
+    </h1>
+    <button aria-label="Search" class="text-gray-600 hover:text-gray-900 focus:outline-none" id="btn-search" title="Cari produk">
+     <i class="fas fa-search text-lg">
+     </i>
+    </button>
+   </div>
+  </header>
+  <!-- Main content -->
+  <main class="flex-grow pt-16 pb-28 max-w-md mx-auto w-full px-4">
+   <!-- Banner -->
+   <section class="relative rounded-lg overflow-hidden mb-6">
+    <img alt="Banner promo spesial diskon 50 persen dengan latar belakang warna cerah dan tulisan besar" class="w-full h-40 object-cover" height="200" src="https://storage.googleapis.com/a1aa/image/96c4017e-a679-414b-7fd2-50334743c800.jpg" width="600"/>
+    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+     <h2 class="text-white text-2xl font-bold">
+      Website Store SkyxCode
+     </h2>
+    </div>
+   </section>
+   <!-- Kategori Produk -->
+   <section class="mb-6">
+    <h3 class="text-lg font-semibold mb-3 text-gray-800">
+     Kategori Menu
+    </h3>
+    <div aria-label="Daftar kategori produk" class="flex space-x-4 overflow-x-auto pb-1 category-scroll" role="list">
+     <button aria-label="Kategori Suntik" class="flex flex-col items-center min-w-[72px] bg-white rounded-lg shadow p-3 hover:shadow-lg focus:outline-none" data-category="Suntik" role="listitem">
+      <img alt="Ikon kategori suntik berupa gambar smartphone berwarna biru" class="w-12 h-12 mb-1" height="48" src="https://storage.googleapis.com/a1aa/image/df9770f4-91e8-4915-211a-a1d9b65c572f.jpg" width="48"/>
+      <span class="text-xs text-gray-700">
+       Suntik Sosmed
+      </span>
+     </button>
+     <button aria-label="Kategori Panel" class="flex flex-col items-center min-w-[72px] bg-white rounded-lg shadow p-3 hover:shadow-lg focus:outline-none" data-category="Panel" role="listitem">
+      <img alt="Ikon kategori Panel berupa gambar kaos berwarna merah" class="w-12 h-12 mb-1" height="48" src="https://files.catbox.moe/zqhbg5.jpeg" width="48"/>
+      <span class="text-xs text-gray-700">
+       Pterodactyle Server
+      </span>
+     </button>
+     <button aria-label="Kategori Script" class="flex flex-col items-center min-w-[72px] bg-white rounded-lg shadow p-3 hover:shadow-lg focus:outline-none" data-category="Script" role="listitem">
+      <img alt="Ikon kategori Script berupa gambar Script olahraga berwarna hijau" class="w-12 h-12 mb-1" height="48" src="https://img1.pixhost.to/images/6615/613181720_imgtmp.jpg" width="48"/>
+      <span class="text-xs text-gray-700">
+       Script
+      </span>
+     </button>
+     <button aria-label="Kategori Vps" class="flex flex-col items-center min-w-[72px] bg-white rounded-lg shadow p-3 hover:shadow-lg focus:outline-none" data-category="Virtual Private Server" role="listitem">
+      <img alt="Ikon kategori aksesoris berupa gambar jam tangan berwarna hitam" class="w-12 h-12 mb-1" height="48" src="https://files.catbox.moe/vqzoxn.jpeg" width="48"/>
+      <span class="text-xs text-gray-700">
+       Vps
+      </span>
+     </button>
+     <button aria-label="Kategori Domain" class="flex flex-col items-center min-w-[72px] bg-white rounded-lg shadow p-3 hover:shadow-lg focus:outline-none" data-category="Domain" role="listitem">
+      <img alt="Domain Dengan Keamanan CloudFlare" class="w-12 h-12 mb-1" height="48" src="https://files.catbox.moe/jyjtxe.jpeg" width="48"/>
+      <span class="text-xs text-gray-700">
+       Domain
+      </span>
+     </button>
+    </div>
+   </section>
+   <!-- Produk Terbaru -->
+   <section>
+    <h3 class="text-lg font-semibold mb-3 text-gray-800" id="section-title">
+     Produk Terbaru
+    </h3>
+    <div aria-atomic="true" aria-live="polite" aria-relevant="additions removals" class="grid grid-cols-2 gap-4" id="product-list">
+     <!-- Produk akan di-render di sini oleh JS -->
+    </div>
+   </section>
+  </main>
+  <!-- Checkout Button fixed above bottom nav -->
+  <div class="fixed bottom-16 left-0 right-0 max-w-md mx-auto px-4 z-40">
+   <button aria-label="Checkout dan pesan via WhatsApp" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold shadow-lg focus:outline-none" id="btn-checkout" disabled>
+    <i class="fab fa-whatsapp mr-2"></i> Checkout via WhatsApp
+   </button>
+  </div>
+  <!-- Bottom Navigation -->
+  <nav aria-label="Navigasi utama" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-inner max-w-md mx-auto flex justify-around py-2" role="navigation">
+   <button aria-current="page" aria-label="Beranda" class="flex flex-col items-center text-indigo-600 focus:outline-none" id="nav-home" title="Beranda">
+    <i class="fas fa-home text-xl">
+    </i>
+    <span class="text-xs mt-1 font-semibold">
+     Beranda
+    </span>
+   </button>
+   <button aria-label="Kategori" class="flex flex-col items-center text-gray-600 hover:text-indigo-600 focus:outline-none" id="nav-category" title="Kategori">
+    <i class="fas fa-th-large text-xl">
+    </i>
+    <span class="text-xs mt-1 font-semibold">
+     Kategori
+    </span>
+   </button>
+   <button aria-label="Keranjang" class="flex flex-col items-center text-gray-600 hover:text-indigo-600 focus:outline-none relative" id="nav-cart" title="Keranjang">
+    <i class="fas fa-shopping-cart text-xl">
+    </i>
+    <span class="text-xs mt-1 font-semibold">
+     Keranjang
+    </span>
+    <span aria-atomic="true" aria-live="polite" class="absolute -top-1 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center" id="cart-count" style="display:none">
+     0
+    </span>
+   </button>
+   <button aria-label="Akun" class="flex flex-col items-center text-gray-600 hover:text-indigo-600 focus:outline-none" id="nav-account" title="Akun">
+    <i class="fas fa-user text-xl">
+    </i>
+    <span class="text-xs mt-1 font-semibold">
+     Akun
+    </span>
+   </button>
+  </nav>
+  <!-- Modal Container -->
+  <div aria-labelledby="modal-title" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="modal-container" role="dialog">
+   <div class="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto shadow-lg p-6 relative" id="modal-content">
+    <button aria-label="Tutup modal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 focus:outline-none" id="modal-close">
+     <i class="fas fa-times text-xl">
+     </i>
+    </button>
+    <h2 class="text-xl font-semibold mb-4" id="modal-title">
+    </h2>
+    <div class="text-gray-700" id="modal-body">
+    </div>
+   </div>
+  </div>
+  <script>
+   (() => {
+    // Data produk lengkap
+    const products = [
+     {
+      id: 1,
+      category: 'Suntik',
+      name: 'Suntik Telegram',
+      description: 'Suntik Pengikut Channel Telegram',
+      price: 10000,
+      image:
+       'https://files.catbox.moe/iq91ib.jpeg?text=Smartphone+Hitam+Layar+Besar+Desain+Modern&font=Inter&font-size=14&bg=374151&fg=ffffff',
+     },
+     {
+      id: 2,
+      category: 'Panel',
+      name: 'Panel 1gb-unli',
+      description: 'Panel Dengan Kualitas Terbaik Dan Anti Maling',
+      price: 1000,
+      image:
+       'https://files.catbox.moe/zqhbg5.jpeg?text=Kaos+Polos+Putih+Katun+Lembut&font=Inter&font-size=14&bg=f3f4f6&fg=111827',
+     },
+     {
+      id: 3,
+      category: 'Script',
+      name: 'Script Bot Telegram',
+      description: 'Script Telegram Dengan Kualitas Terbaik Tanpa Eror Dan Free Update',
+      price: 35000,
+      image:
+       'https://img1.pixhost.to/images/6615/613181720_imgtmp.jpg?text=Script+Olahraga+Hitam+Sol+Putih+Sporty&font=Inter&font-size=14&bg=1f2937&fg=ffffff',
+     },
+     {
+      id: 4,
+      category: 'Virtual Private Server',
+      name: 'Vps Ram 16Gb 4Core',
+      description: 'Virtual Private Server Dengan Kualitas Terbaik',
+      price: 40000,
+      image:
+       'https://files.catbox.moe/fro0eb.jpeg?text=Jam+Tangan+Digital+Hitam+LED+Strap+Karet&font=Inter&font-size=14&bg=111827&fg=ffffff',
+     },
+     {
+      id: 5,
+      category: 'Suntik',
+      name: 'Suntik Twiter',
+      description: 'Suntik Pengikut,Suntik View,Suntik Cmd',
+      price: 10000,
+      image:
+       'https://files.catbox.moe/g4tvgp.jpeg?text=Headphone+Wireless+Hitam+Suara+Jernih&font=Inter&font-size=14&bg=374151&fg=ffffff',
+     },
+     {
+      id: 6,
+      category: 'Panel',
+      name: 'Reseller Panel',
+      description: 'Reseller Panel Dengan Kualitas Terbaik Dan Selamanya',
+      price: 15000,
+      image:
+       'https://files.catbox.moe/zqhbg5.jpeg?text=Jaket+Denim+Biru+Stylish&font=Inter&font-size=14&bg=3b82f6&fg=ffffff',
+     },
+     {
+      id: 7,
+      category: 'Script',
+      name: 'Script Bot WhatsApp',
+      description: 'Script Kualitas Terbaik Tanpa Error Dan Free Update',
+      price: 35000,
+      image:
+       'https://img1.pixhost.to/images/6615/613181720_imgtmp.jpg?text=Sandal+Kulit+Coklat+Nyaman&font=Inter&font-size=14&bg=a16207&fg=ffffff',
+     },
+     {
+      id: 8,
+      category: 'Virtual Private Server',
+      name: 'Vps Ram 8Gb 4Core',
+      description: 'Virtual Private Server Dengan Kualitas Terbaik',
+      price: 30000,
+      image:
+       'https://files.catbox.moe/fro0eb.jpeg?text=Kacamata+Hitam+Stylish+UV&font=Inter&font-size=14&bg=000000&fg=ffffff',
+     },
+     {
+      id: 9,
+      category: 'Suntik',
+      name: 'Suntik Channel WhatsApp',
+      description: 'Suntik Pengikut Saluran WhatsApp',
+      price: 10000,
+      image:
+       'https://files.catbox.moe/6q5me6.jpg?text=Novel+Best+Seller+Cerita+Inspiratif&font=Inter&font-size=14&bg=92400e&fg=ffffff',
+     },
+     {
+      id: 10,
+      category: 'Suntik',
+      name: 'Suntik Instagram',
+      description: 'Suntik Followers,Suntik Like,Suntik Viewers,Suntik Verif Meta',
+      price: 10000,
+      image:
+       'https://files.catbox.moe/rtt84o.jpeg?text=Buku+Resep+Masakan+Lengkap&font=Inter&font-size=14&bg=78350f&fg=ffffff',
+     },
+     {
+      id: 11,
+      category: 'Suntik',
+      name: 'Suntik Tiktok',
+      description: 'Suntik Followers,Suntik Like,Suntik Viewers',
+      price: 10000,
+      image:
+       'https://files.catbox.moe/fh1xiy.jpeg?text=Smartwatch+Fitur+Kesehatan+Notifikasi&font=Inter&font-size=14&bg=1e293b&fg=ffffff',
+     },
+     {
+      id: 12,
+      category: 'Panel',
+      name: 'Admin Panel',
+      description: 'Admin Panel Dengan Akses Penuh Ke panel',
+      price: 15000,
+      image:
+       'https://files.catbox.moe/zqhbg5.jpeg?text=Celana+Jeans+Pria+Slim+Fit+Biru+Tua&font=Inter&font-size=14&bg=1e40af&fg=ffffff',
+     },
+     {
+      id: 13,
+      category: 'Virtual Private Server',
+      name: 'Vps Ram 4Gb 2Core',
+      description: 'Virtual Private Server Dengan Kualitas Terbaik',
+      price: 20000,
+      image:
+       'https://files.catbox.moe/fro0eb.jpeg?text=Script+Formal+Kulit+Hitam&font=Inter&font-size=14&bg=111827&fg=ffffff',
+     },
+     {
+      id: 14,
+      category: 'Virtual Private Server',
+      name: 'Vps Ram 2Gb 1Core',
+      description: 'Virtual Private Server Dengan Kualitas Terbaik',
+      price: 15000,
+      image:
+       'https://files.catbox.moe/fro0eb.jpeg?text=Dompet+Kulit+Asli+Slot+Kartu&font=Inter&font-size=14&bg=78350f&fg=ffffff',
+     },
+     {
+      id: 15,
+      category: 'Domain',
+      name: 'Domain',
+      description: 'Domain Dengan Security CloudFlare',
+      price: 8000,
+      image:
+       'https://files.catbox.moe/jyjtxe.jpeg?text=Buku+Anak-Anak+Bergambar&font=Inter&font-size=14&bg=fbbf24&fg=111827',
+     },
+     {
+      id: 16,
+      category: 'Domain',
+      name: 'Domain',
+      description: 'Domain Tanpa Security CloudFlare',
+      price: 6000,
+      image:
+       'https://files.catbox.moe/jyjtxe.jpeg?text=Buku+Anak-Anak+Bergambar&font=Inter&font-size=14&bg=fbbf24&fg=111827',
+     },
+     {
+      id: 17,
+      category: 'Panel',
+      name: 'Owner Panel',
+      description: 'Owner Panel Dengan Akses Penuh Ke Panel Dan Kepercayaan',
+      price: 20000,
+      image:
+       'https://files.catbox.moe/zqhbg5.jpeg?text=Celana+Jeans+Pria+Slim+Fit+Biru+Tua&font=Inter&font-size=14&bg=1e40af&fg=ffffff',
+     }
+    ];
+
+    // Nomor WhatsApp seller (ganti sesuai kebutuhan, tanpa tanda + atau spasi)
+    const waNumber = '6281263405208';
+
+    // Keranjang belanja (array objek produk dengan qty)
+    let cart = [];
+
+    // Elemen DOM
+    const productListEl = document.getElementById('product-list');
+    const headerTitleEl = document.getElementById('header-title');
+    const sectionTitleEl = document.getElementById('section-title');
+    const modalContainer = document.getElementById('modal-container');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const modalCloseBtn = document.getElementById('modal-close');
+    const cartCountEl = document.getElementById('cart-count');
+    const btnCheckout = document.getElementById('btn-checkout');
+
+    // Navigation buttons
+    const navHome = document.getElementById('nav-home');
+    const navCategory = document.getElementById('nav-category');
+    const navCart = document.getElementById('nav-cart');
+    const navAccount = document.getElementById('nav-account');
+
+    // Category buttons container
+    const categoryButtons = document.querySelectorAll('[data-category]');
+
+    // Search button
+    const btnSearch = document.getElementById('btn-search');
+
+    // Current view state
+    let currentView = 'home'; // home, category, cart, account, search
+    let currentCategory = null;
+    let currentSearchTerm = '';
+
+    // Utility: format number to Rupiah
+    function formatRupiah(number) {
+     return (
+      'Rp' +
+      number
+       .toString()
+       .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+     );
+    }
+
+    // Render products list based on filter
+    function renderProducts(filterCategory = null, searchTerm = '') {
+     let filteredProducts = products;
+
+     if (filterCategory) {
+      filteredProducts = filteredProducts.filter(
+       (p) => p.category === filterCategory
+      );
+     }
+
+     if (searchTerm.trim() !== '') {
+      const term = searchTerm.toLowerCase();
+      filteredProducts = filteredProducts.filter(
+       (p) =>
+        p.name.toLowerCase().includes(term) ||
+        p.description.toLowerCase().includes(term) ||
+        p.category.toLowerCase().includes(term)
+      );
+     }
+
+     if (filteredProducts.length === 0) {
+      productListEl.innerHTML =
+       '<p class="col-span-2 text-center text-gray-500 mt-6">Produk tidak ditemukan.</p>';
+      return;
+     }
+
+     productListEl.innerHTML = filteredProducts
+      .map(
+       (product) => `
+      <article
+       class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-200 flex flex-col"
+       tabindex="0"
+       role="button"
+       aria-pressed="false"
+       data-product-id="${product.id}"
+      >
+       <img
+        alt="Gambar produk ${product.name} kategori ${product.category} dengan deskripsi: ${product.description}"
+        class="w-full h-40 object-cover rounded-t-lg"
+        height="300"
+        src="${product.image}"
+        width="300"
+       />
+       <div class="p-3 flex flex-col flex-grow">
+        <h4 class="text-sm font-semibold text-gray-900 mb-1 truncate">${product.name}</h4>
+        <p class="text-xs text-gray-600 mb-2">${product.description}</p>
+        <div class="mt-auto flex items-center justify-between">
+         <span class="text-sm font-bold text-indigo-600">${formatRupiah(
+          product.price
+         )}</span>
+         <button
+          aria-label="Tambah ke keranjang ${product.name}"
+          class="text-indigo-600 hover:text-indigo-800 focus:outline-none add-to-cart-btn"
+          data-product-id="${product.id}"
+         >
+          <i class="fas fa-shopping-cart"></i>
+         </button>
+        </div>
+       </div>
+      </article>
+     `
+      )
+      .join('');
+    }
+
+    // Render cart items
+    function renderCart() {
+     headerTitleEl.textContent = 'Keranjang Belanja';
+     sectionTitleEl.textContent = '';
+
+     if (cart.length === 0) {
+      productListEl.innerHTML =
+       '<p class="col-span-2 text-center text-gray-500 mt-6">Keranjang Anda kosong.</p>';
+      btnCheckout.disabled = true;
+      return;
+     }
+
+     btnCheckout.disabled = false;
+
+     productListEl.innerHTML = cart
+      .map(
+       (item) => `
+      <article
+       class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-200 flex flex-col"
+       tabindex="0"
+       role="region"
+       aria-label="Produk ${item.name} di keranjang"
+       data-product-id="${item.id}"
+      >
+       <img
+        alt="Gambar produk ${item.name} kategori ${item.category} dengan deskripsi: ${item.description}"
+        class="w-full h-40 object-cover rounded-t-lg"
+        height="300"
+        src="${item.image}"
+        width="300"
+       />
+       <div class="p-3 flex flex-col flex-grow">
+        <h4 class="text-sm font-semibold text-gray-900 mb-1 truncate">${item.name}</h4>
+        <p class="text-xs text-gray-600 mb-2">${item.description}</p>
+        <div class="flex items-center justify-between mb-2">
+         <span class="text-sm font-bold text-indigo-600">${formatRupiah(
+          item.price
+         )}</span>
+         <button
+          aria-label="Hapus ${item.name} dari keranjang"
+          class="text-red-600 hover:text-red-800 focus:outline-none remove-from-cart-btn"
+          data-product-id="${item.id}"
+         >
+          <i class="fas fa-trash-alt"></i>
+         </button>
+        </div>
+        <div class="flex items-center space-x-3">
+         <button
+          aria-label="Kurangi jumlah ${item.name} di keranjang"
+          class="px-2 py-1 bg-gray-200 rounded focus:outline-none decrease-qty-btn"
+          data-product-id="${item.id}"
+         >
+          -
+         </button>
+         <span aria-live="polite" aria-atomic="true" class="font-semibold">${item.qty}</span>
+         <button
+          aria-label="Tambah jumlah ${item.name} di keranjang"
+          class="px-2 py-1 bg-gray-200 rounded focus:outline-none increase-qty-btn"
+          data-product-id="${item.id}"
+         >
+          +
+         </button>
+        </div>
+       </div>
+      </article>
+     `
+      )
+      .join('');
+
+     // Total harga
+     const totalPrice = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+     const totalEl = document.createElement('div');
+     totalEl.className = 'col-span-2 bg-white rounded-lg shadow p-4 mt-4 text-right font-bold text-indigo-700';
+     totalEl.textContent = `Total: ${formatRupiah(totalPrice)}`;
+     productListEl.appendChild(totalEl);
+    }
+
+    // Render account page
+    function renderAccount() {
+     headerTitleEl.textContent = 'Akun Saya';
+     sectionTitleEl.textContent = '';
+     productListEl.innerHTML = `
+      <section class="bg-white rounded-lg shadow p-6 text-gray-800">
+       <h3 class="text-lg font-semibold mb-4">Informasi Pengguna</h3>
+       <p>Nama: <strong>SkyxCode</strong></p>
+       <p>Email: <strong>SkyxCode.com</strong></p>
+       <p>Telepon: <strong>+62 812-6340-5208</strong></p>
+       <button id="btn-logout" class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded font-semibold focus:outline-none">
+        Logout
+       </button>
+      </section>
+     `;
+     btnCheckout.disabled = true;
+    }
+
+    // Render category page (show categories bigger)
+    function renderCategoryPage() {
+     headerTitleEl.textContent = 'Kategori Produk';
+     sectionTitleEl.textContent = '';
+     productListEl.innerHTML = `
+      <div class="grid grid-cols-3 gap-4">
+       <button
+        aria-label="Kategori Suntik"
+        class="flex flex-col items-center bg-white rounded-lg shadow p-6 hover:shadow-lg focus:outline-none"
+        data-category="Suntik"
+       >
+        <img
+         alt="Ikon kategori suntik berupa gambar smartphone berwarna biru"
+         class="w-16 h-16 mb-2"
+         height="64"
+         src="https://placehold.co/64x64/png?text=📱&font=Inter&font-size=32&bg=3b82f6&fg=ffffff"
+         width="64"
+        />
+        <span class="text-sm text-gray-700 font-semibold">Suntik</span>
+       </button>
+       <button
+        aria-label="Kategori Panel"
+        class="flex flex-col items-center bg-white rounded-lg shadow p-6 hover:shadow-lg focus:outline-none"
+        data-category="Panel"
+       >
+        <img
+         alt="Ikon kategori Panel berupa gambar kaos berwarna merah"
+         class="w-16 h-16 mb-2"
+         height="64"
+         src="https://placehold.co/64x64/png?text=👕&font=Inter&font-size=32&bg=ef4444&fg=ffffff"
+         width="64"
+        />
+        <span class="text-sm text-gray-700 font-semibold">Panel</span>
+       </button>
+       <button
+        aria-label="Kategori Script"
+        class="flex flex-col items-center bg-white rounded-lg shadow p-6 hover:shadow-lg focus:outline-none"
+        data-category="Script"
+       >
+        <img
+         alt="Ikon kategori Script berupa gambar Script olahraga berwarna hijau"
+         class="w-16 h-16 mb-2"
+         height="64"
+         src="https://placehold.co/64x64/png?text=👟&font=Inter&font-size=32&bg=22c55e&fg=ffffff"
+         width="64"
+        />
+        <span class="text-sm text-gray-700 font-semibold">Script</span>
+       </button>
+       <button
+        aria-label="Kategori Vps"
+        class="flex flex-col items-center bg-white rounded-lg shadow p-6 hover:shadow-lg focus:outline-none"
+        data-category="Vps"
+       >
+        <img
+         alt="Ikon kategori vps berupa gambar jam tangan berwarna hitam"
+         class="w-16 h-16 mb-2"
+         height="64"
+         src="https://placehold.co/64x64/png?text=⌚&font=Inter&font-size=32&bg=000000&fg=ffffff"
+         width="64"
+        />
+        <span class="text-sm text-gray-700 font-semibold">Vps</span>
+       </button>
+       <button
+        aria-label="Kategori Buku"
+        class="flex flex-col items-center bg-white rounded-lg shadow p-6 hover:shadow-lg focus:outline-none"
+        data-category="Buku"
+       >
+        <img
+         alt="Ikon kategori buku berupa gambar tumpukan buku berwarna coklat"
+         class="w-90 h-90 mb-2"
+         height="90"
+         src="https://files.catbox.moe/iq91ib.jpeg?text=📚&font=Inter&font-size=900&bg=92400e&fg=ffffff"
+         width="90"
+        />
+        <span class="text-sm text-gray-700 font-semibold">Domain</span>
+       </button>
+      </div>
+     `;
+     btnCheckout.disabled = true;
+    }
+
+    // Render search page
+    function renderSearchPage() {
+     headerTitleEl.textContent = 'Cari Produk';
+     sectionTitleEl.textContent = '';
+     productListEl.innerHTML = `
+      <form id="search-form" class="mb-4">
+       <label for="search-input" class="sr-only">Cari produk</label>
+       <input
+        type="search"
+        id="search-input"
+        name="search"
+        placeholder="Cari produk..."
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        value="${currentSearchTerm}"
+        autocomplete="off"
+       />
+      </form>
+     `;
+     // Render products filtered by currentSearchTerm
+     renderProducts(null, currentSearchTerm);
+
+     // Add event listener for search input
+     const searchForm = document.getElementById('search-form');
+     const searchInput = document.getElementById('search-input');
+     searchInput.focus();
+
+     searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      currentSearchTerm = searchInput.value.trim();
+      renderProducts(null, currentSearchTerm);
+     });
+
+     searchInput.addEventListener('input', (e) => {
+      currentSearchTerm = e.target.value.trim();
+      renderProducts(null, currentSearchTerm);
+     });
+     btnCheckout.disabled = true;
+    }
+
+    // Update cart count badge
+    function updateCartCount() {
+     const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+     if (totalQty > 0) {
+      cartCountEl.style.display = 'flex';
+      cartCountEl.textContent = totalQty > 99 ? '99+' : totalQty;
+     } else {
+      cartCountEl.style.display = 'none';
+     }
+    }
+
+    // Add product to cart
+    function addToCart(productId) {
+     const product = products.find((p) => p.id === productId);
+     if (!product) return;
+
+     const cartItem = cart.find((item) => item.id === productId);
+     if (cartItem) {
+      cartItem.qty++;
+     } else {
+      cart.push({ ...product, qty: 1 });
+     }
+     updateCartCount();
+     alert(`Produk "${product.name}" berhasil ditambahkan ke keranjang.`);
+    }
+
+    // Remove product from cart
+    function removeFromCart(productId) {
+     cart = cart.filter((item) => item.id !== productId);
+     updateCartCount();
+     renderCart();
+    }
+
+    // Increase quantity in cart
+    function increaseQty(productId) {
+     const cartItem = cart.find((item) => item.id === productId);
+     if (cartItem) {
+      cartItem.qty++;
+      updateCartCount();
+      renderCart();
+     }
+    }
+
+    // Decrease quantity in cart
+    function decreaseQty(productId) {
+     const cartItem = cart.find((item) => item.id === productId);
+     if (cartItem) {
+      if (cartItem.qty > 1) {
+       cartItem.qty--;
+      } else {
+       // Remove if qty 1 and decrease pressed
+       cart = cart.filter((item) => item.id !== productId);
+      }
+      updateCartCount();
+      renderCart();
+     }
+    }
+
+    // Show modal with content
+    function showModal(title, contentHtml) {
+     modalTitle.textContent = title;
+     modalBody.innerHTML = contentHtml;
+     modalContainer.classList.remove('hidden');
+     modalContainer.focus();
+    }
+
+    // Hide modal
+    function hideModal() {
+     modalContainer.classList.add('hidden');
+     modalTitle.textContent = '';
+     modalBody.innerHTML = '';
+    }
+
+    // Show product detail modal
+    function showProductDetail(productId) {
+     const product = products.find((p) => p.id === productId);
+     if (!product) return;
+     const content = `
+      <img
+       alt="Gambar detail produk ${product.name} kategori ${product.category} dengan deskripsi: ${product.description}"
+       class="w-full h-48 object-cover rounded-lg mb-4"
+       src="${product.image}"
+       width="400"
+       height="200"
+      />
+      <p class="mb-2"><strong>Kategori:</strong> ${product.category}</p>
+      <p class="mb-2">${product.description}</p>
+      <p class="mb-4 font-bold text-indigo-600 text-lg">${formatRupiah(product.price)}</p>
+      <button id="modal-add-to-cart" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded font-semibold focus:outline-none">
+       Tambah ke Keranjang
+      </button>
+     `;
+     showModal(product.name, content);
+
+     // Add event listener for add to cart button inside modal
+     const btnAddToCart = document.getElementById('modal-add-to-cart');
+     btnAddToCart.addEventListener('click', () => {
+      addToCart(productId);
+      hideModal();
+     });
+    }
+
+    // Show account logout confirmation modal
+    function showLogoutConfirm() {
+     const content = `
+      <p>Apakah Anda yakin ingin logout?</p>
+      <div class="mt-6 flex justify-end space-x-4">
+       <button id="btn-logout-cancel" class="px-4 py-2 rounded border border-gray-300 hover:bg-gray-100 focus:outline-none">Batal</button>
+       <button id="btn-logout-confirm" class="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700 focus:outline-none">Logout</button>
+      </div>
+     `;
+     showModal('Konfirmasi Logout', content);
+
+     document.getElementById('btn-logout-cancel').addEventListener('click', () => {
+      hideModal();
+     });
+     document.getElementById('btn-logout-confirm').addEventListener('click', () => {
+      alert('Anda telah logout.');
+      hideModal();
+      // Reset to home view after logout
+      switchView('home');
+     });
+    }
+
+    // Switch active nav button styling
+    function setActiveNav(button) {
+     [navHome, navCategory, navCart, navAccount].forEach((btn) => {
+      btn.classList.remove('text-indigo-600', 'font-semibold');
+      btn.classList.add('text-gray-600');
+     });
+     button.classList.add('text-indigo-600', 'font-semibold');
+     button.classList.remove('text-gray-600');
+    }
+
+    // Switch main view
+    function switchView(view) {
+     currentView = view;
+     currentCategory = null;
+     currentSearchTerm = '';
+     updateCartCount();
+
+     // Reset header and section titles
+     headerTitleEl.textContent = 'SkyxCode Shop';
+     sectionTitleEl.textContent = 'Produk Terbaru';
+
+     if (view === 'home') {
+      setActiveNav(navHome);
+      renderProducts();
+      btnCheckout.disabled = true;
+     } else if (view === 'category') {
+      setActiveNav(navCategory);
+      renderCategoryPage();
+      btnCheckout.disabled = true;
+     } else if (view === 'cart') {
+      setActiveNav(navCart);
+      renderCart();
+     } else if (view === 'account') {
+      setActiveNav(navAccount);
+      renderAccount();
+     } else if (view === 'search') {
+      setActiveNav(btnSearch);
+      renderSearchPage();
+     }
+    }
+
+    // Filter products by category and switch to home view with filter
+    function filterByCategory(category) {
+     currentCategory = category;
+     currentView = 'home';
+     headerTitleEl.textContent = `Kategori: ${category}`;
+     sectionTitleEl.textContent = '';
+     setActiveNav(navHome);
+     renderProducts(category);
+     btnCheckout.disabled = true;
+    }
+
+    // Event delegation for product list clicks
+    productListEl.addEventListener('click', (e) => {
+     // Add to cart button
+     if (e.target.closest('.add-to-cart-btn')) {
+      const btn = e.target.closest('.add-to-cart-btn');
+      const productId = parseInt(btn.dataset.productId, 10);
+      addToCart(productId);
+      return;
+     }
+
+     // Remove from cart button
+     if (e.target.closest('.remove-from-cart-btn')) {
+      const btn = e.target.closest('.remove-from-cart-btn');
+      const productId = parseInt(btn.dataset.productId, 10);
+      removeFromCart(productId);
+      return;
+     }
+
+     // Increase qty button
+     if (e.target.closest('.increase-qty-btn')) {
+      const btn = e.target.closest('.increase-qty-btn');
+      const productId = parseInt(btn.dataset.productId, 10);
+      increaseQty(productId);
+      return;
+     }
+
+     // Decrease qty button
+     if (e.target.closest('.decrease-qty-btn')) {
+      const btn = e.target.closest('.decrease-qty-btn');
+      const productId = parseInt(btn.dataset.productId, 10);
+      decreaseQty(productId);
+      return;
+     }
+
+     // Click on product card to show detail modal (only if not clicking buttons inside)
+     const article = e.target.closest('article[data-product-id]');
+     if (article && !e.target.closest('button')) {
+      const productId = parseInt(article.dataset.productId, 10);
+      showProductDetail(productId);
+     }
+    });
+
+    // Keyboard accessibility for product cards (Enter or Space to open detail)
+    productListEl.addEventListener('keydown', (e) => {
+     if (
+      (e.key === 'Enter' || e.key === ' ') &&
+      e.target.matches('article[data-product-id]')
+     ) {
+      e.preventDefault();
+      const productId = parseInt(e.target.dataset.productId, 10);
+      showProductDetail(productId);
+     }
+    });
+
+    // Category buttons click
+    categoryButtons.forEach((btn) => {
+     btn.addEventListener('click', () => {
+      filterByCategory(btn.dataset.category);
+     });
+    });
+
+    // Modal close button
+    modalCloseBtn.addEventListener('click', hideModal);
+
+    // Close modal on outside click
+    modalContainer.addEventListener('click', (e) => {
+     if (e.target === modalContainer) {
+      hideModal();
+     }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+     if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
+      hideModal();
+     }
+    });
+
+    // Navigation buttons click
+    navHome.addEventListener('click', () => {
+     switchView('home');
+    });
+    navCategory.addEventListener('click', () => {
+     switchView('category');
+    });
+    navCart.addEventListener('click', () => {
+     switchView('cart');
+    });
+    navAccount.addEventListener('click', () => {
+     switchView('account');
+    });
+
+    // Search button click
+    btnSearch.addEventListener('click', () => {
+     currentView = 'search';
+     renderSearchPage();
+    });
+
+    // Delegate logout button inside account page
+    productListEl.addEventListener('click', (e) => {
+     if (e.target.id === 'btn-logout' || e.target.closest('#btn-logout')) {
+      showLogoutConfirm();
+     }
+    });
+
+    // Checkout button click
+    btnCheckout.addEventListener('click', () => {
+     if (cart.length === 0) {
+      alert('Keranjang Anda kosong.');
+      return;
+     }
+     // Buat pesan WA dengan daftar produk dan total harga
+     let message = 'Halo, saya ingin memesan produk berikut:%0A%0A';
+     cart.forEach((item, i) => {
+      message += `${i + 1}. ${item.name} (x${item.qty}) - ${formatRupiah(
+       item.price * item.qty
+      )}%0A`;
+     });
+     const totalPrice = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+     message += `%0ATotal: ${formatRupiah(totalPrice)}%0A%0ATerima kasih.`;
+
+     // Encode URI
+     const waUrl = `https://wa.me/${waNumber}?text=${message}`;
+
+     // Buka WhatsApp di tab baru
+     window.open(waUrl, '_blank');
+    });
+
+    // Initial render
+    switchView('home');
+   })();
+  </script>
+ </body>
+</html>
